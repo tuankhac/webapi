@@ -1,11 +1,9 @@
 # webapi
     This is document describe about NEO API.
-    This API is update version base on old API. Mechanism is creation a file sql.properties which declare a couple key value. 
+    This API is updated version was based on old API. Mechanism is creation a file sql.properties which declare a couple key value. 
     Key is name which we declare for api code, value is mapped with statement in database like MySQL, Oracle, SQL Server .... 
     
     This current version apply for Oracle.
-    In sql.properties file , with every statement, we must declare two rows, one for statement and another for declarement 
-    list all parameters are putted from API represent with parameters in statement of database.
 
     API: We use methods as: 
 
@@ -40,5 +38,9 @@
     With statement dont need to put any parameter, yep we dont need to config 2 rows, simple is 1 row like this.
     Ex2: update_book=update book set name='Life of Steve Job' where id =1
     
+    + Security: Oh. To can pass over all of api. We need to authorize first. In mean we need to login by send 
+    user/pass(encrypt by algorithm we regulated). When we logged in successfully, we will get object contains info about account we 
+    logged in and it contains token. Every time we call api we need to put token with key is "Authorization" into 
+    header of every request.
     That is very simple. Right!.
     Ok . Let us enjoy.
