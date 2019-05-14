@@ -86,11 +86,11 @@ public class TrippleDes {
 	}
 
 	public static void main(String args[]) throws Exception {
-		//TrippleDes td = new TrippleDes();
+		TrippleDes td = new TrippleDes();
 		// 2U7303OGyu7acuXlwPMk5Q==
 		String target = "charging_admin_new";
-		String encrypted = TrippleDes.encrypt(target);
-		String decrypted = TrippleDes.decrypt(encrypted);
+		String encrypted = td.encrypt(target);
+		String decrypted = td.decrypt(encrypted);
 
 		System.out.println("String To Encrypt: " + target);
 		System.out.println("Encrypted String:" + encrypted);

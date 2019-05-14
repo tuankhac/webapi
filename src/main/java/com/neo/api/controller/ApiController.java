@@ -33,7 +33,7 @@ import com.neo.api.utils.ConstantParams;
 // @PropertySources({ @PropertySource("classpath:static/sql.properties") })
 public class ApiController {
 	@Autowired
-	private SqlProperties env;
+	private SqlProperties env; 
 
 	@Autowired
 	private ObjectService objectService;
@@ -123,8 +123,8 @@ public class ApiController {
 	@ResponseBody
 	public <Type> Type ref(@RequestParam Map<Object, Object> params) {
 		System.out.println(params.toString());
-		String sql = env.getProperty(params.get(CONNECTION_STRING).toString());
 
+		String sql = env.getProperty(params.get(CONNECTION_STRING).toString());
 		Logger.getLogger("ws").info(params.toString() + "| SQL: ======>" + sql);
 		String[] order = null;
 		if (env.getProperty(params.get(CONNECTION_STRING) + PARAM) != null) {
@@ -169,8 +169,8 @@ public class ApiController {
 	public Object valParam(@RequestParam Map<Object, Object> params) {
 		Object result = null;
 		System.out.println(params.toString());
-		String sql = env.getProperty(params.get(CONNECTION_STRING).toString());
 
+		String sql = env.getProperty(params.get(CONNECTION_STRING).toString());
 		Logger.getLogger("ws").info(params.toString() + "| SQL: ======>" + sql);
 		String[] order = null;
 		if (env.getProperty(params.get(CONNECTION_STRING) + PARAM) != null) {
@@ -188,10 +188,9 @@ public class ApiController {
 	public Object valBody(@RequestBody Map<Object, Object> params) {
 		Object result = null;
 		System.out.println(params.toString());
+
 		String sql = env.getProperty(params.get(CONNECTION_STRING).toString());
-
 		Logger.getLogger("ws").info(params.toString() + "| SQL: ======>" + sql);
-
 		String[] order = null;
 		if (env.getProperty(params.get(CONNECTION_STRING) + PARAM) != null) {
 			order = env.getProperty(params.get(CONNECTION_STRING) + PARAM).split(ConstantParams.SPLIT_CHARACTER);
@@ -212,8 +211,8 @@ public class ApiController {
 	public Object updateParam(@RequestParam Map<Object, Object> params) {
 		Object result = 0;
 		System.out.println(params.toString());
-		String sql = env.getProperty(params.get(CONNECTION_STRING).toString());
 
+		String sql = env.getProperty(params.get(CONNECTION_STRING).toString());
 		Logger.getLogger("ws").info(params.toString() + "| SQL: ======>" + sql);
 		String[] order = null;
 		if (env.getProperty(params.get(CONNECTION_STRING) + PARAM) != null) {
@@ -234,10 +233,9 @@ public class ApiController {
 	public Object updateBody(@RequestBody Map<Object, Object> params) {
 		Object result = 0;
 		System.out.println(params.toString());
+
 		String sql = env.getProperty(params.get(CONNECTION_STRING).toString());
-
 		Logger.getLogger("ws").info(params.toString() + "| SQL: ======>" + sql);
-
 		String[] order = null;
 		if (env.getProperty(params.get(CONNECTION_STRING) + PARAM) != null) {
 			order = env.getProperty(params.get(CONNECTION_STRING) + PARAM).split(ConstantParams.SPLIT_CHARACTER);
@@ -254,7 +252,6 @@ public class ApiController {
 			@RequestParam Map<Object, Object> params) {
 		System.out.println(params.toString());
 		Logger.getLogger("ws").info("uploads:========>" + params.toString());
-
 		Object result = 0;
 		System.out.println(photos[0].getOriginalFilename());
 

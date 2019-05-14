@@ -33,6 +33,8 @@ import com.neo.api.utils.TrippleDes;
 import oracle.jdbc.OracleTypes;
 
 import com.neo.api.utils.ImageResizer;
+import com.neo.api.utils.MD5;
+import com.neo.api.utils.SHA512;
 
 @Service
 // @CacheConfig(cacheNames={"users"}) // tells Spring where to store
@@ -113,7 +115,7 @@ public class ObjectService {
 			return list;
 		} catch (SQLException e) {
 			Logger.getLogger("ws-error")
-					.error(params.toString() + "|SQL: ========>" + sql + "| Exception: ===========>" + e.getMessage());
+					.error(params.toString() + "|SQL: ========>" + sql + "| Exception: ===========>" + e.getMessage());				   
 			throw new RuntimeException(e);
 		} finally {
 			if (conn != null) {
@@ -333,10 +335,10 @@ public class ObjectService {
 				stream.close();
 
 			} catch (IllegalStateException e) {
-				Logger.getLogger("ws-error").error(params.toString() + "| Exception: ===========>" + e.getMessage());
+				Logger.getLogger("ws-error").error(params.toString() + "| Exception: ===========>" + e.getMessage());																						 
 				e.printStackTrace();
 			} catch (IOException ie) {
-				Logger.getLogger("sql").info(params.toString());
+				Logger.getLogger("sql").info(params.toString());									
 				ie.printStackTrace();
 			}
 		}

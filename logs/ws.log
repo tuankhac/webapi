@@ -1,14 +1,1 @@
-2019-05-04_22-11-14|{constr=menu_service, puser=thangph}
-2019-05-04_22-11-18|{pid=abc, pdescription=anc, prole_name=ancj, constr=insert_books}
-2019-05-04_22-11-29|{constr=menu_service_json, puser=thangph}
-2019-05-04_22-11-50|{constr=search_query}
-2019-05-04_22-16-13|{constr=search_query}
-2019-05-04_22-16-16|{pid=abc, pdescription=anc, prole_name=ancj, constr=insert_books}
-2019-05-04_22-19-38|{pid=abc, pdescription=anc, prole_name=ancj, constr=insert_books}
-2019-05-04_22-19-45|{constr=menu_service, puser=thangph}
-2019-05-04_22-25-49|{constr=menu_service, puser=thangph}| SQL: ======>begin ?:= charging_admin_new.qtht.layds_menu_theo_nguoidung(?); end;
-2019-05-04_22-25-54|{constr=menu_service, puser=thangph}| SQL: ======>begin ?:= charging_admin_new.qtht.layds_menu_theo_nguoidung(?); end;
-2019-05-04_22-25-58|{pid=abc, pdescription=anc, prole_name=ancj, constr=insert_books}| SQL: ======>null
-2019-05-04_22-26-02|{pid=abc, pdescription=anc, prole_name=ancj, constr=insert_books}| SQL: ======>null
-2019-05-04_22-29-13|{pid=abc, pdescription=anc, prole_name=ancj, constr=insert_books}| SQL: ======>null
-2019-05-04_22-32-04|{pid=abc, pdescription=anc, prole_name=ancj, constr=insert_books}| SQL: ======>null
+2019-05-06_18-44-21|{constr=menu_service, puser=thangph}| SQL: ======>begin ?:= charging_admin_new.qtht.layds_menu_theo_nguoidung(?); end;

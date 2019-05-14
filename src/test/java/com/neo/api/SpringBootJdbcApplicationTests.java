@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class WebServiceApiApplicationTests {
+public class SpringBootJdbcApplicationTests {
 
 	@Test
 	public void contextLoads() {

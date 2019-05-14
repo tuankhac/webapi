@@ -85,7 +85,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 	public boolean allowRequestWithoutToken(HttpServletRequest request) {
 		System.out.println("request.getRequestURI():========>"+request.getRequestURI());
 		if (request.getRequestURI().contains("/login") || request.getRequestURI().contains("/error")
-				|| request.getRequestURI().contains("/api")|| request.getRequestURI().contains("/")) {
+				|| request.getRequestURI().contains("/api")) {
 			return true;
 		}
 		return false;
