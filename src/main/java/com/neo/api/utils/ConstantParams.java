@@ -21,6 +21,6 @@ public class ConstantParams {
 	public static String LOG_CONFIG_FILE = "static/log4j.properties";
 	//ConstantParams.class.getClassLoader().getResource("log4j.properties").getPath();
 	// public static String sqlFile = "sql.properties";
-	public static final int REFRESH_DELAY = 2 * 60 * 1000;
+	public static final int REFRESH_DELAY = 2 * 1000;
 	//	public static final int REFRESH_DELAY = 1000;
 }

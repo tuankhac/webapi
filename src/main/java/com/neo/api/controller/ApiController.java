@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,7 @@ import com.neo.api.service.ObjectService;
 import com.neo.api.service.TokenService;
 import com.neo.api.utils.ConstantParams;
 
-//@Controller
+@Transactional
 @RestController
 @RequestMapping("/neo/gw")
 // @PropertySources({ @PropertySource("classpath:static/sql.properties") })
@@ -79,6 +80,21 @@ public class ApiController {
 		}
 		return null;
 	}
+	
+	@RequestMapping(value = "/nlogin", method = { RequestMethod.POST }, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public ObjectId nlogin(@RequestParam String username, @RequestParam String password) {
+		String token = "";
+		ObjectId objectId;
+		objectId = objectService.login(username,password, env.getProperty("nlogin_service"));
+		if (objectId != null) {
+			token = tokenService.createToken(username);
+			objectId.setToken(token);
+			System.out.println("tra ra day");
+			return objectId;
+		}
+		return null;
+	}
 
 	/*
 	 * @param cac cau query dang nay chu yeu xuat ra du lieu dang result set va chi
@@ -105,8 +121,6 @@ public class ApiController {
 		List<Map<Object, Object>> list = objectService.qry(params, sql, order);
 		if (list == null) {
 			return null;
-		} else if (list.size() == 1) {
-			return ((Type) list.get(0));
 		} else {
 			return ((Type) list);
 		}
@@ -136,8 +150,6 @@ public class ApiController {
 		List<Map<Object, Object>> list = objectService.ref(params, sql, order);
 		if (list == null) {
 			return null;
-		} else if (list.size() == 1) {
-			return ((Type) list.get(0));
 		} else {
 			return ((Type) list);
 		}

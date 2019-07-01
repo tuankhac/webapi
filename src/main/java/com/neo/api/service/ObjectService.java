@@ -24,18 +24,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.cache.annotation.CacheConfig;
 //import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.neo.api.model.ObjectId;
 import com.neo.api.utils.ConstantParams;
 import com.neo.api.utils.TrippleDes;
 
-import oracle.jdbc.OracleTypes;
-
 import com.neo.api.utils.ImageResizer;
 import com.neo.api.utils.MD5;
 import com.neo.api.utils.SHA512;
-
+@Transactional
 @Service
 // @CacheConfig(cacheNames={"users"}) // tells Spring where to store
 public class ObjectService {
@@ -44,6 +43,70 @@ public class ObjectService {
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
+	}
+
+	public ObjectId login(String username, String password, String sql, String alogithm, boolean useSaltPass) {
+		ObjectId objectId = null;
+		Connection conn = null;
+		CallableStatement ps = null;
+		ResultSet rs = null;
+		String encodePassword = null;
+		try {
+			conn = dataSource.getConnection();
+			ps = conn.prepareCall(sql);
+			ps.setObject(1, username);
+
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				
+				String pass = rs.getString("PASSWORD");
+				objectId = new ObjectId(username, pass);
+	
+				objectId.setDeparment(rs.getString("DEPARTMENT"));
+				objectId.setEmail(rs.getString("EMAIL").trim());
+				objectId.setFirst_name(rs.getString("FIRST_NAME"));
+				objectId.setLast_name(rs.getString("LAST_NAME"));
+				objectId.setGender(rs.getBoolean("GENDER"));
+				objectId.setMobile(rs.getString("MOBILE"));
+				objectId.setRole_level(rs.getInt("ROLE_LEVER"));
+				objectId.setStatus(rs.getInt("STATUS_ID"));
+				objectId.setSalt_pass(rs.getString("SALT_PASS"));
+	
+				objectId.setModified_date(rs.getTimestamp("MODIFIED_DATE"));
+				objectId.setCreate_date(rs.getTimestamp("CREATED_DATE"));
+				if (useSaltPass) {
+					switch (alogithm) {
+					case "MD5":
+						encodePassword = MD5.encrypt(password + objectId.getSalt_pass());
+						break;
+	
+					default:
+						encodePassword = SHA512.encrypt(password + objectId.getSalt_pass());
+						break;
+					}
+				}
+				if (objectId.getPassword().equals(encodePassword)) {
+					System.out.println("chay vao day");
+					return objectId;
+				}
+			}
+			return objectId;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 	}
 
 	public ObjectId login(String username, String password, String sql) {
@@ -58,16 +121,28 @@ public class ObjectService {
 			ps.setObject(1, username);
 
 			rs = ps.executeQuery();
-			rs.next();
-			String pass = rs.getString("PASSWORD");
-			objectId = new ObjectId(username, pass);
+			if (rs.next()) {
+				
+				String pass = rs.getString("PASSWORD");
+				objectId = new ObjectId(username, pass);
+				encodePassword = password;
+				if (!objectId.getPassword().equals(encodePassword)) {
+					return null;
+				}
+				objectId.setDeparment(rs.getString("DEPARTMENT"));
+				objectId.setEmail(rs.getString("EMAIL"));
+				objectId.setFirst_name(rs.getString("FIRST_NAME"));
+				objectId.setLast_name(rs.getString("LAST_NAME"));
+				objectId.setGender(rs.getBoolean("GENDER"));
+				objectId.setMobile(rs.getString("MOBILE"));
+				objectId.setRole_level(rs.getInt("ROLE_LEVER"));
+				objectId.setStatus(rs.getInt("STATUS_ID"));
+				objectId.setSalt_pass(rs.getString("SALT_PASS"));
 
-			// encodePassword = MD5.encrypt(password);
-			encodePassword = password;
-			System.out.println(
-					"encodePassword====>" + encodePassword + "|username ===>" + username + "|pass:=====>" + pass);
-			if (objectId.getPassword().equals(encodePassword)) {
-				System.out.println("chay vao day");
+				objectId.setModified_date(rs.getTimestamp("MODIFIED_DATE"));
+				objectId.setCreate_date(rs.getTimestamp("CREATED_DATE"));
+
+				// encodePassword = MD5.encrypt(password);
 				return objectId;
 			}
 			return null;
@@ -115,7 +190,7 @@ public class ObjectService {
 			return list;
 		} catch (SQLException e) {
 			Logger.getLogger("ws-error")
-					.error(params.toString() + "|SQL: ========>" + sql + "| Exception: ===========>" + e.getMessage());				   
+					.error(params.toString() + "|SQL: ========>" + sql + "| Exception: ===========>" + e.getMessage());
 			throw new RuntimeException(e);
 		} finally {
 			if (conn != null) {
@@ -143,14 +218,13 @@ public class ObjectService {
 		try {
 			conn = dataSource.getConnection();
 			ps = conn.prepareCall(sql);
-			ps.registerOutParameter(1, OracleTypes.CURSOR);
-			int i = 2;
+			int i = 1;
 			for (String s : order) {
 				ps.setObject(i, params.get(s));
 				i++;
 			}
 			ps.execute();
-			rs = (ResultSet) ps.getObject(1);
+			rs = ps.getResultSet();
 			while (rs.next()) {
 				item = new HashMap<>();
 				for (i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -335,10 +409,10 @@ public class ObjectService {
 				stream.close();
 
 			} catch (IllegalStateException e) {
-				Logger.getLogger("ws-error").error(params.toString() + "| Exception: ===========>" + e.getMessage());																						 
+				Logger.getLogger("ws-error").error(params.toString() + "| Exception: ===========>" + e.getMessage());
 				e.printStackTrace();
 			} catch (IOException ie) {
-				Logger.getLogger("sql").info(params.toString());									
+				Logger.getLogger("sql").info(params.toString());
 				ie.printStackTrace();
 			}
 		}
