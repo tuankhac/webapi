@@ -1,0 +1,23 @@
+{  
+    "sEmptyTable":"Không có dữ liệu hiển thị",
+    "sInfo":"Hiển thị từ _START_ tới _END_ của _TOTAL_ bản ghi",
+    "sInfoEmpty":"Hiển thị 0 tới 0 của 0 bản ghi",
+    "sInfoFiltered":"Thông tin lọc",
+    "sInfoPostFix":"",
+    "sInfoThousands":".",
+    "sLengthMenu":"Hiển thị _MENU_ bản ghi",
+    "sLoadingRecords":"Đang tải dữ liệu...",
+    "sProcessing":"Đang xử lí...",
+    "sSearch":"Tìm kiếm",
+    "sZeroRecords":"Keine Eintr�ge vorhanden.",
+    "oPaginate":{  
+        "sFirst":"First",
+        "sPrevious":"Previous",
+        "sNext":"Next",
+        "sLast":"Last"
+    },
+    "oAria":{  
+        "sSortAscending":": Sắp xếp tăng dần",
+        "sSortDescending":": Sắp xếp giảm dần"
+    }
+}
