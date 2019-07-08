@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 public class UrlLocaleResolver implements LocaleResolver {
 
@@ -36,7 +37,7 @@ public class UrlLocaleResolver implements LocaleResolver {
 		}
 		// Vietnamese
 		else if (uri.startsWith(prefixVi)) {
-			locale = new Locale("vi","VN");
+			locale = new Locale("vi", "VN");
 		}
 		if (locale != null) {
 			request.getSession().setAttribute(URL_LOCALE_ATTRIBUTE_NAME, locale);
@@ -44,7 +45,7 @@ public class UrlLocaleResolver implements LocaleResolver {
 		if (locale == null) {
 			locale = (Locale) request.getSession().getAttribute(URL_LOCALE_ATTRIBUTE_NAME);
 			if (locale == null) {
-				locale = new Locale("vi","VN");
+				locale = new Locale("vi", "VN");
 			}
 		}
 		return locale;
@@ -52,7 +53,15 @@ public class UrlLocaleResolver implements LocaleResolver {
 
 	@Override
 	public void setLocale(HttpServletRequest request, HttpServletResponse response, Locale locale) {
-		// Nothing
+		LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
+		if (localeResolver == null) {
+			throw new IllegalStateException("No LocaleResolver found: not in a DispatcherServlet request?");
+		}
+
+		// Lấy ra thông tin Locale từ LocaleResolver
+		locale = localeResolver.resolveLocale(request);
+		System.out.println("langugage" + locale.getLanguage());
+		localeResolver.setLocale(request, response, locale);
 	}
 
 }

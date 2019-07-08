@@ -1,3 +1,83 @@
+function decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+} 
+// Data-table ajax json objects 
+getDataTableAjaxObject = function(idDOM,url,data,columns){
+    if(langugage === "vi"){
+    	var lang_url = 'vi/i18n/dataTable/vi.json';
+    }else if(langugage === "en"){
+    	var lang_url = 'en/i18n/dataTable/en.json';
+    }
+    var table = $('#'+idDOM).DataTable({
+    	"destroy": true,
+    	"language":{
+    		"url":lang_url
+    	},
+        "ajax": {
+        	"type": "GET",
+        	"contentType": "application/json; charset=utf-8",
+        	"url":url,
+        	"data":data
+        },
+        "columns": columns,
+        "orderCellsTop": true,
+        "fixedHeader": true,
+        "rowId": 'staffId',
+        "JQueryUI":true,
+        "processing": true,
+        
+    });
+    return table;
+} 
+
+getDataTableAjaxObjectFtExport = function(idDOM,url,data,columns){
+    if(langugage === "vi"){
+    	var lang_url = 'vi/i18n/dataTable/vi.json';
+    }else if(langugage === "en"){
+    	var lang_url = 'en/i18n/dataTable/en.json';
+    }
+    var table = $('#'+idDOM).DataTable({
+    	"destroy": true,
+    	"language":{
+    		"url":lang_url
+    	},
+        "ajax": {
+        	"type": "GET",
+        	"contentType": "application/json; charset=utf-8",
+        	"url":url,
+        	"data":data
+        },
+        "columns": columns,
+        "orderCellsTop": true,
+        "fixedHeader": true,
+        "rowId": 'staffId',
+        "JQueryUI":true,
+        "processing": true,
+        "selected":true,
+        dom: 'lBfrtip', // l character help showing sLengthMenu 
+        buttons: [{
+            extend: 'copyHtml5',
+            exportOptions: {
+                columns: [0, ':visible']
+            }
+        }, {
+            extend: 'excelHtml5',
+            exportOptions: {
+                columns: ':visible'
+            }
+        }, {
+            extend: 'pdfHtml5',
+            exportOptions: {
+            	columns: ':visible'
+            }
+        }, 'colvis']
+    });
+    return table;
+}
+
+/*
 $(document).ready(function() {
     setTimeout(function(){
     // Plugin data table
@@ -9,7 +89,7 @@ $(document).ready(function() {
         });
     });
 
-    /* Init the table and fire off a call to get the hidden nodes. */
+    // Init the table and fire off a call to get the hidden nodes. 
 
     var table = $('#dt-plugin-method').DataTable();
 
@@ -47,7 +127,7 @@ $(document).ready(function() {
     };
     $('#dt-ordering').DataTable();
 
-    /* Custom filtering function which will search data in column four between two values */
+    // Custom filtering function which will search data in column four between two values 
     $.fn.dataTable.ext.search.push(
         function(settings, data, dataIndex) {
             var min = parseInt($('#min').val(), 10);
@@ -71,35 +151,35 @@ $(document).ready(function() {
         dtage.draw();
     });
 
-    /* Create an array with the values of all the input boxes in a column */
+    // Create an array with the values of all the input boxes in a column /
     $.fn.dataTable.ext.order['dom-text'] = function(settings, col) {
         return this.api().column(col, { order: 'index' }).nodes().map(function(td, i) {
             return $('input', td).val();
         });
     }
 
-    /* Create an array with the values of all the input boxes in a column, parsed as numbers */
+    // Create an array with the values of all the input boxes in a column, parsed as numbers //
     $.fn.dataTable.ext.order['dom-text-numeric'] = function(settings, col) {
         return this.api().column(col, { order: 'index' }).nodes().map(function(td, i) {
             return $('input', td).val() * 1;
         });
     }
 
-    /* Create an array with the values of all the select options in a column */
+    // Create an array with the values of all the select options in a column //
     $.fn.dataTable.ext.order['dom-select'] = function(settings, col) {
         return this.api().column(col, { order: 'index' }).nodes().map(function(td, i) {
             return $('select', td).val();
         });
     }
 
-    /* Create an array with the values of all the checkboxes in a column */
+    // Create an array with the values of all the checkboxes in a column //
     $.fn.dataTable.ext.order['dom-checkbox'] = function(settings, col) {
         return this.api().column(col, { order: 'index' }).nodes().map(function(td, i) {
             return $('input', td).prop('checked') ? '1' : '0';
         });
     }
 
-    /* Initialise the table with the required column ordering data types */
+    // Initialise the table with the required column ordering data types //
     $(document).ready(function() {
         $('#dt-live-dom').DataTable({
             "columns": [
@@ -166,43 +246,6 @@ $(document).ready(function() {
         ]
     });
 
-    // Data-table ajax
-    
-    
-    getDataTableAjaxObject = function(idDOM,url,data){
-	    if(langugage === "vi"){
-	    	var lang_url = 'vi/i18n/dataTable/vi.json';
-	    }else if(langugage === "en"){
-	    	var lang_url = 'en/i18n/dataTable/en.json';
-	    }
-	    $('#'+idDOM).DataTable({
-	    	"language":{
-	    		"url":lang_url
-	    	},
-	        "ajax": {
-	        	"type": "GET",
-	        	"url":url,
-	        	"data":data
-	        }
-	    	/*,
-	        "columns": [
-	            { "data": "ID" },
-	            { "data": "NAME" },
-	            { "data": "NAME_EN" },
-	            { "data": "DISPLAY_ORDER" },
-	            { "data": "PICTURE_FILE" },
-	            { "data": "DETAIL_FILE" },
-	            { "data": "MENU_LEVEL" },
-	            { "data": "PARENT_ID" },
-	            { "data": "PUBLISH" }
-	        ]*/
-	    });
-    }   
-    //neo/ref/dt_ajax.html dt-json-data/objects.txt
-    var data_menu = {"constr":"search_menu"};
-    getDataTableAjaxObject("list-menu-dt-ajax","dt-json-data/arrays.txt",data_menu);
-    
-    
     
     $('#dt-ajax-object').DataTable({
         "ajax": "dt-json-data/objects.txt",
@@ -418,7 +461,7 @@ $(document).ready(function() {
     });
     // Delete rows end
 
-    // /* Formatting function for row details - modify as you need */
+    // // Formatting function for row details - modify as you need //
     function format(d) {
         // `d` is the original data object for the row
         return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
@@ -720,3 +763,4 @@ $(document).ready(function() {
     });
 },350);
 });
+*/

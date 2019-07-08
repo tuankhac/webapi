@@ -23,14 +23,17 @@
 			int idx = 1;
 			if (menus != null) {
 				for (Menu menu : menus) {
+					if(menu.getName() == null || "".equals(menu.getName())){
+						continue;
+					}
 					//neu detail_file null nghia no la menu cha va can xuat cac menu con
 					if (idx == 1) {
-						if ((menu.getDetailFile() == null)
-								|| (menu.getDetailFile() != null && "".equals(menu.getDetailFile()))) {
+						if ((menu.getDetail_file() == null)
+								|| (menu.getDetail_file() != null && "".equals(menu.getDetail_file()))) {
 							treeMenu.append("<li class='pcoded-hasmenu' id='").append(menu.getId()).append("'>");
 							treeMenu.append("<a href='javascript:void(0)' class='waves-effect waves-dark'>");
 							treeMenu.append("<span class='pcoded-micon'>").append("<i class='")
-									.append(menu.getPictureFile()).append("'></i></span>");
+									.append(menu.getPicture_file()).append("'></i></span>");
 							treeMenu.append("<span class='pcoded-mtext'>");
 							if (response.getLocale().getLanguage().equals("vi")
 									|| request.getLocale().getLanguage().equals("vi_VN")) {
@@ -44,13 +47,13 @@
 						}
 						idx++;
 					} else {
-						if ((menu.getDetailFile() == null)
-								|| (menu.getDetailFile() != null && "".equals(menu.getDetailFile()))) {
+						if ((menu.getDetail_file() == null)
+								|| (menu.getDetail_file() != null && "".equals(menu.getDetail_file()))) {
 							treeMenu.append("</ul></li>");
 							treeMenu.append("<li class='pcoded-hasmenu' id='").append(menu.getId()).append("'>");
 							treeMenu.append("<a href='javascript:void(0)' class='waves-effect waves-dark'>");
 							treeMenu.append("<span class='pcoded-micon'>").append("<i class='")
-									.append(menu.getPictureFile()).append("'></i></span>");
+									.append(menu.getPicture_file()).append("'></i></span>");
 							treeMenu.append("<span class='pcoded-mtext'>");
 							if (response.getLocale().getLanguage().equals("vi")
 									|| request.getLocale().getLanguage().equals("vi_VN")) {
@@ -63,7 +66,7 @@
 							treeMenu.append("<ul class='pcoded-submenu'>");
 						} else {
 							treeMenu.append("<li class='' id='").append(menu.getId()).append("'><a href='")
-									.append(request.getSession().getAttribute("ctxAdmin")).append(menu.getDetailFile())
+									.append(request.getSession().getAttribute("ctxAdmin")).append(menu.getDetail_file())
 									.append("' class='waves-effect waves-dark' onclick='activeThis(this)'> <span class='pcoded-mtext'>");
 							if (response.getLocale().getLanguage().equals("vi")
 									|| request.getLocale().getLanguage().equals("vi_VN")) {

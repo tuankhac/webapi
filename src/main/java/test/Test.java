@@ -35,12 +35,12 @@ public class Test {
 		// System.out.println(list2);
 
 		Map<Object, Object> params = new HashMap<>();
-		params.put("constr", "search_1");
-		params.put("pa", "Qun");
+		params.put("constr", "edit_test");
+		params.put("pt1", "Tiếng thành iệt");
 		params.put("pb", "Qun");
 		params.put("pc", "Qun");
 		params.put("pd", "Qun");
-		Object list2 = func.valPostParam(params,
+		Object list2 = func.testpostDataParam("val1",params,
 				"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkQXQiOjE1NTgzNzQ1NjMsInVzZXJJZCI6InRoYW5ncGgifQ.zJ5vPwhhKxJb3P4XiUEuyLgUoGI7RU1FYHsBtmCos-E");
 
 		System.out.println(list2);

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.config.RequestConfig.Builder;
@@ -49,7 +50,7 @@ public class FuncRepository {
 	public FuncRepository(Environment env, ObjectMapper mapper) {
 		super();
 		this.env = env;
-		this.mapper = mapper; 
+		this.mapper = mapper;
 	}
 
 	public Environment getEnv() {
@@ -105,6 +106,10 @@ public class FuncRepository {
 
 			response = httpClient.execute(httpGet);
 			String json = IOUtils.toString(response.getEntity().getContent(), "UTF-8");
+
+			// unescape html character
+			//json = StringEscapeUtils.unescapeHtml(json);
+
 			System.out.println("result==>" + json);
 
 			T t = null;
@@ -130,8 +135,8 @@ public class FuncRepository {
 
 	// # post data json
 	private Object postDataParam(String method, Map<Object, Object> params, String token) {
-		String url = env.getProperty("service_url").trim() + method + SPLIT;
-		// String url = "http://localhost:8090/neo/gw/" + method + SPLIT;
+		// String url = env.getProperty("service_url").trim() + method + SPLIT;
+		String url = "http://localhost:8090/neo/gw/" + method;
 		CloseableHttpClient httpClient = null;
 		CloseableHttpResponse response = null;
 		try {
@@ -146,14 +151,17 @@ public class FuncRepository {
 			for (Map.Entry<Object, Object> entry : params.entrySet()) {
 				listParams.add(new BasicNameValuePair(entry.getKey().toString(), entry.getValue().toString()));
 			}
-			UrlEncodedFormEntity form = new UrlEncodedFormEntity(listParams);
+			UrlEncodedFormEntity form = new UrlEncodedFormEntity(listParams, ConstantParams.ENCODE_UTF8);
 			form.setContentEncoding(ConstantParams.ENCODE_UTF8);
+			// httpPost.setEntity(new StringEntity(IOUtils.toString(form.getContent()),
+			// ConstantParams.ENCODE_UTF8));
 			httpPost.setEntity(form);
 
 			// set the connection timeout value to 30 seconds (30000 milliseconds)
 			Builder builder = RequestConfig.custom();
-			builder.setConnectTimeout(Integer.parseInt(env.getProperty("service_timeout").trim()) * 1000);
-			// builder.setConnectTimeout(30 * 1000);
+			// builder.setConnectTimeout(Integer.parseInt(env.getProperty("service_timeout").trim())
+			// * 1000);
+			builder.setConnectTimeout(30 * 1000);
 			builder.setAuthenticationEnabled(true);
 			RequestConfig requestConfig = builder.build();
 			httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
@@ -166,7 +174,9 @@ public class FuncRepository {
 			t = (Object) json;
 			return t;
 		} catch (Exception e) {
+			Object t = (Object)e.getMessage();
 			e.printStackTrace();
+			return t;
 		} finally {
 			try {
 				httpClient.close();
@@ -175,11 +185,10 @@ public class FuncRepository {
 				e.printStackTrace();
 			}
 		}
-		return null;
 	}
 
 	private Object postDataBody(String method, Map<Object, Object> params, String token) {
-		String url = env.getProperty("service_url").trim() + method + SPLIT;
+		String url = env.getProperty("service_url").trim() + method;
 		// String url = "http://localhost:8090/neo/gw/" + method + SPLIT;
 		CloseableHttpClient httpClient = null;
 		CloseableHttpResponse response = null;
@@ -194,13 +203,67 @@ public class FuncRepository {
 			for (Map.Entry<Object, Object> entry : params.entrySet()) {
 				listParams.add(new BasicNameValuePair(entry.getKey().toString(), entry.getValue().toString()));
 			}
-			UrlEncodedFormEntity form = new UrlEncodedFormEntity(listParams);
+			UrlEncodedFormEntity form = new UrlEncodedFormEntity(listParams, ConstantParams.ENCODE_UTF8);
 			form.setContentEncoding(ConstantParams.ENCODE_UTF8);
 			httpPost.setEntity(form);
 
 			// set the connection timeout value to 30 seconds (30000 milliseconds)
 			Builder builder = RequestConfig.custom();
 			builder.setConnectTimeout(Integer.parseInt(env.getProperty("service_timeout").trim()) * 1000);
+			// builder.setConnectTimeout(30 * 1000);
+			builder.setAuthenticationEnabled(true);
+			RequestConfig requestConfig = builder.build();
+			httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
+
+			response = httpClient.execute(httpPost);
+			String json = IOUtils.toString(response.getEntity().getContent(), "UTF-8");
+			System.out.println("result==>" + json);
+
+			Object t = null;
+			t = (Object) json;
+			return t;
+		} catch (Exception e) {
+			Object t = (Object)e.getMessage();
+			e.printStackTrace();
+			return t;
+		} finally {
+			try {
+				httpClient.close();
+				response.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public Object testpostDataParam(String method, Map<Object, Object> params, String token) {
+		// String url = env.getProperty("service_url").trim() + method + SPLIT;
+		String url = "http://localhost:8090/neo/gw/" + method + SPLIT;
+		CloseableHttpClient httpClient = null;
+		CloseableHttpResponse response = null;
+		String jsons = "{constr:\"insert_test\",pt1:\"tiếng việt\"}";
+		try {
+			HttpPost httpPost = new HttpPost(url);
+
+			// add request header
+			httpPost.addHeader("User-Agent", USER_AGENT);
+			httpPost.addHeader("Authorization", token);
+			httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+			// httpPost.setHeader("Content-Type", "text/plain;charset=UTF-8");
+
+			List<NameValuePair> listParams = new ArrayList<NameValuePair>();
+			for (Map.Entry<Object, Object> entry : params.entrySet()) {
+				listParams.add(new BasicNameValuePair(entry.getKey().toString(), entry.getValue().toString()));
+			}
+			UrlEncodedFormEntity form = new UrlEncodedFormEntity(listParams, ConstantParams.ENCODE_UTF8);
+			form.setContentEncoding(ConstantParams.ENCODE_UTF8);
+			// httpPost.setEntity(new StringEntity(jsons,ConstantParams.ENCODE_UTF8));
+			httpPost.setEntity(form);
+
+			// set the connection timeout value to 30 seconds (30000 milliseconds)
+			Builder builder = RequestConfig.custom();
+			// builder.setConnectTimeout(Integer.parseInt(env.getProperty("service_timeout").trim())
+			// * 1000);
 			// builder.setConnectTimeout(30 * 1000);
 			builder.setAuthenticationEnabled(true);
 			RequestConfig requestConfig = builder.build();
@@ -225,11 +288,12 @@ public class FuncRepository {
 		}
 		return null;
 	}
+
 	// # end post data json
 
 	// # login
 	@SuppressWarnings("unchecked")
-	public <Type> Type login(final TypeReference<Type> type,String username, String password) {
+	public <Type> Type login(final TypeReference<Type> type, String username, String password) {
 		String url = env.getProperty("service_url").trim() + "login";
 		// String url = "http://localhost:8090/neo/gw/" + "/login";
 		CloseableHttpClient httpClient = null;
@@ -262,7 +326,7 @@ public class FuncRepository {
 			System.out.println("result==>" + json);
 
 			Type t = null;
-			if(!json.equals("")) {
+			if (!json.equals("")) {
 				t = (Type) mapper.readValue(json, type);
 			}
 			return t;
@@ -270,8 +334,10 @@ public class FuncRepository {
 			e.printStackTrace();
 		} finally {
 			try {
-				httpClient.close();
-				response.close();
+				if (httpClient != null)
+					httpClient.close();
+				if (response != null)
+					response.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -318,8 +384,10 @@ public class FuncRepository {
 			e.printStackTrace();
 		} finally {
 			try {
-				httpClient.close();
-				response.close();
+				if (httpClient != null)
+					httpClient.close();
+				if (response != null)
+					response.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

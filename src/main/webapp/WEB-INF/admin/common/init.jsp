@@ -59,4 +59,7 @@
 	href="assets/files/assets/css/style.css">
 <link rel="stylesheet" type="text/css"
 	href="assets/files/assets/css/widget.css">
+	
+<!-- jquery ui -->
+<link href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/south-street/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 </head>

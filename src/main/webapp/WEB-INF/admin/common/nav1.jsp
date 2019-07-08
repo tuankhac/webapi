@@ -1,4 +1,4 @@
-<%@page import="java.util.Locale"%>
+<%-- <%@page import="java.util.Locale"%>
 <%@page import="java.util.List"%>
 <%@page import="com.neo.app.model.Menu"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -14,9 +14,9 @@
 <nav class="pcoded-navbar">
 <div class="nav-list">
 	<div class="pcoded-inner-navbar main-menu">
-		<%-- <div class="pcoded-navigation-label">
+		<div class="pcoded-navigation-label">
                 <s:message code="navigation" />
-            </div> --%>
+            </div>
 		<%
 				StringBuilder treeMenu = new StringBuilder("<ul class='pcoded-item pcoded-left-item'>");
 				List<Menu> menus = (List<Menu>)request.getSession().getAttribute("menus");
@@ -73,4 +73,4 @@
 		<c:out value="${pageContext.request.locale.language}" />
 	</div>
 </div>
-</nav>
+</nav> --%>

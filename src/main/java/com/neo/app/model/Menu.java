@@ -25,19 +25,21 @@ public class Menu implements Serializable {
 	private Long display_order;
 
 	@JsonProperty("PICTURE_FILE")
-	private String pictureFile;
+	private String picture_file;
 
 	@JsonProperty("DETAIL_FILE")
-	private String detailFile;
+	private String detail_file;
 
 	@JsonProperty("MENU_LEVEL")
-	private Long menuLevel; 
+	private Long menu_level;
 
 	@JsonProperty("PARENT_ID")
-	private Long parentId;
+	private Long parent_id;
 
 	@JsonProperty("PUBLISH")
 	private Long publish;
+
+	private String constr;
 
 	public Long getId() {
 		return id;
@@ -71,36 +73,36 @@ public class Menu implements Serializable {
 		this.display_order = display_order;
 	}
 
-	public String getPictureFile() {
-		return pictureFile;
+	public String getPicture_file() {
+		return picture_file;
 	}
 
-	public void setPictureFile(String pictureFile) {
-		this.pictureFile = pictureFile;
+	public void setPicture_file(String picture_file) {
+		this.picture_file = picture_file;
 	}
 
-	public String getDetailFile() {
-		return detailFile;
+	public String getDetail_file() {
+		return detail_file;
 	}
 
-	public void setDetailFile(String detailFile) {
-		this.detailFile = detailFile;
+	public void setDetail_file(String detail_file) {
+		this.detail_file = detail_file;
 	}
 
-	public Long getMenuLevel() {
-		return menuLevel;
+	public Long getMenu_level() {
+		return menu_level;
 	}
 
-	public void setMenuLevel(Long menuLevel) {
-		this.menuLevel = menuLevel;
+	public void setMenu_level(Long menu_level) {
+		this.menu_level = menu_level;
 	}
 
-	public Long getParentId() {
-		return parentId;
+	public Long getParent_id() {
+		return parent_id;
 	}
 
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
+	public void setParent_id(Long parent_id) {
+		this.parent_id = parent_id;
 	}
 
 	public Long getPublish() {
@@ -109,6 +111,14 @@ public class Menu implements Serializable {
 
 	public void setPublish(Long publish) {
 		this.publish = publish;
+	}
+
+	public String getConstr() {
+		return constr;
+	}
+
+	public void setConstr(String constr) {
+		this.constr = constr;
 	}
 
 }

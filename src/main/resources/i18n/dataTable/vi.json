@@ -9,7 +9,7 @@
     "sLoadingRecords":"Đang tải dữ liệu...",
     "sProcessing":"Đang xử lí...",
     "sSearch":"Tìm kiếm",
-    "sZeroRecords":"Keine Eintr�ge vorhanden.",
+    "sZeroRecords":"Không có bản ghi nào",
     "oPaginate":{  
         "sFirst":"First",
         "sPrevious":"Previous",

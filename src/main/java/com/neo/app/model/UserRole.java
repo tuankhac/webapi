@@ -22,6 +22,9 @@ public class UserRole implements Serializable {
 	@JsonProperty("USER_ID")
 	private String user_id;
 
+	@JsonProperty("MENU_ID")
+	private Long menu_id;
+
 	public Long getId() {
 		return id;
 	}
@@ -44,6 +47,14 @@ public class UserRole implements Serializable {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+	}
+
+	public Long getMenu_id() {
+		return menu_id;
+	}
+
+	public void setMenu_id(Long menu_id) {
+		this.menu_id = menu_id;
 	}
 
 }
