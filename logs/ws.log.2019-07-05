@@ -1,0 +1,3 @@
+2019-07-05_23-54-15|{constr=menu_service, puserid=admin}| SQL: ======>{call layds_menu_theo_nguoidung(?)}
+2019-07-05_23-54-15|{constr=userRolesQuery, puserid=admin}| SQL: ======>select * from user_role where user_id = ?
+2019-07-05_23-56-55|{constr=search_menu, _=1562345814014, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}

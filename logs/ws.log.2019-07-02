@@ -1,0 +1,33 @@
+2019-07-02_21-07-27|{constr=menu_service, puserid=admin}| SQL: ======>{call layds_menu_theo_nguoidung(?)}
+2019-07-02_21-07-28|{constr=userRolesQuery, puserid=admin}| SQL: ======>select * from user_role where user_id = ?
+2019-07-02_21-22-01|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_21-22-26|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_21-25-29|{constr=search_menu, _=1562077528934, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_21-28-57|{constr=search_menu, _=1562077736642, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_21-35-07|{constr=search_menu, _=1562078106401, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_21-49-32|{constr=search_menu, _=1562078971545, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_21-51-33|{constr=search_menu, _=1562079092828, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_21-58-58|{constr=search_menu, _=1562079538128, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-17-02|{constr=search_menu, _=1562080621868, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-17-27|{constr=search_menu, _=1562080647122, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-18-01|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-18-04|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-22-07|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-22-50|{constr=search_menu, _=1562080970008, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-23-14|{constr=search_menu, _=1562080993827, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-23-44|{constr=search_menu, _=1562081023370, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-43-26|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-43-57|{constr=search_menu, _=1562082236988, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_22-45-49|{constr=search_menu, _=1562082348794, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-13-56|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-15-52|{constr=search_menu, _=1562084149888, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-16-07|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-29-29|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-30-21|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-31-01|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-40-14|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-40-19|{constr=search_menu, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-40-28|{constr=search_menu, _=1562085627520, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-43-32|{constr=search_menu, _=1562085811872, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-51-15|{constr=search_menu, _=1562086274387, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}
+2019-07-02_23-59-27|{constr=search_menu, _=1562086762452, pUserId=admin, pUserIp=0:0:0:0:0:0:0:1}| SQL: ======>{call search_menu(?,?)}

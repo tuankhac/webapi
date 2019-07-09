@@ -11,6 +11,7 @@ import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -121,5 +122,15 @@ public class WebConfig implements WebMvcConfigurer {
 		SessionLocaleResolver localeResolver = new SessionLocaleResolver();
 		localeResolver.setDefaultLocale(Locale.US);
 		return localeResolver;
+	}
+	
+	@Autowired
+	@Bean(name = "transactionManager")
+	public DataSourceTransactionManager getTransactionManager(DataSource dataSource) {
+		DataSourceTransactionManager txManager = new DataSourceTransactionManager();
+
+		txManager.setDataSource(dataSource);
+
+		return txManager;
 	}
 }

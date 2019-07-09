@@ -1,0 +1,1 @@
+2019-07-06_22-47-22|{constr=edit_test, pb=Qun, pc=Qun, pd=Qun, pt1=Ti?ng th�nh i?t}|SQL: ========>select edit_test(?);| Exception: ===========>Can not issue executeUpdate() or executeLargeUpdate() for SELECTs

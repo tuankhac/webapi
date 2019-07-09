@@ -3,12 +3,15 @@ package com.neo.api.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,7 +37,7 @@ import com.neo.api.utils.ConstantParams;
 // @PropertySources({ @PropertySource("classpath:static/sql.properties") })
 public class ApiController {
 	@Autowired
-	private SqlProperties env; 
+	private SqlProperties env;
 
 	@Autowired
 	private ObjectService objectService;
@@ -80,13 +83,13 @@ public class ApiController {
 		}
 		return null;
 	}
-	
+
 	@RequestMapping(value = "/nlogin", method = { RequestMethod.POST }, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	public ObjectId nlogin(@RequestParam String username, @RequestParam String password) {
 		String token = "";
 		ObjectId objectId;
-		objectId = objectService.login(username,password, env.getProperty("nlogin_service"));
+		objectId = objectService.login(username, password, env.getProperty("nlogin_service"));
 		if (objectId != null) {
 			token = tokenService.createToken(username);
 			objectId.setToken(token);
@@ -191,6 +194,13 @@ public class ApiController {
 			order = new String[0];
 		}
 
+		// escape html character
+		for (Entry<Object, Object> entry : params.entrySet()) {
+			String finalString = entry.getValue().toString();
+			finalString = StringUtils.replaceEach(finalString, new String[] { "&", "\"", "<", ">" },
+					new String[] { "&amp;", "&quot;", "&lt;", "&gt;" });
+			params.put(entry.getKey(), (Object) finalString);
+		}
 		result = objectService.val(params, sql, order);
 		return result;
 	}
@@ -210,6 +220,13 @@ public class ApiController {
 			order = new String[0];
 		}
 
+		// escape html character
+		for (Entry<Object, Object> entry : params.entrySet()) {
+			String finalString = entry.getValue().toString();
+			finalString = StringUtils.replaceEach(finalString, new String[] { "&", "\"", "<", ">" },
+					new String[] { "&amp;", "&quot;", "&lt;", "&gt;" });
+			params.put(entry.getKey(), (Object) finalString);
+		}
 		result = objectService.val(params, sql, order);
 		return result;
 	}
@@ -233,6 +250,13 @@ public class ApiController {
 			order = new String[0];
 		}
 
+		// escape html character
+		for (Entry<Object, Object> entry : params.entrySet()) {
+			String finalString = entry.getValue().toString();
+			finalString = StringUtils.replaceEach(finalString, new String[] { "&", "\"", "<", ">" },
+					new String[] { "&amp;", "&quot;", "&lt;", "&gt;" });
+			params.put(entry.getKey(), (Object) finalString);
+		}
 		result = objectService.update(params, sql, order);
 		return result;
 	}
@@ -253,6 +277,14 @@ public class ApiController {
 			order = env.getProperty(params.get(CONNECTION_STRING) + PARAM).split(ConstantParams.SPLIT_CHARACTER);
 		} else {
 			order = new String[0];
+		}
+
+		// escape html character
+		for (Entry<Object, Object> entry : params.entrySet()) {
+			String finalString = entry.getValue().toString();
+			finalString = StringUtils.replaceEach(finalString, new String[] { "&", "\"", "<", ">" },
+					new String[] { "&amp;", "&quot;", "&lt;", "&gt;" });
+			params.put(entry.getKey(), (Object) finalString);
 		}
 		result = objectService.update(params, sql, order);
 		return result;
