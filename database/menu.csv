@@ -1,0 +1,17 @@
+ID,NAME,NAME_EN,DISPLAY_ORDER,PICTURE_FILE,DETAIL_FILE,DETAIL_FILE_EN,MENU_LEVEL,PARENT_ID,PUBLISH
+1,"Quản trị hệ thống","System management",0,"fa fa-user-secret",NULL,NULL,1,0,1
+2,"Quyền menu",Role,11,"fa fa-lock",crud.jsp?crud_type=role/index.html,crud.jsp?crud_type=role/index.html&language=en_US,2,1,1
+3,"Người dùng",Users,1,fa+fa-users,user,crud.jsp?crud_type=user_info/index.html&language=en_US,2,1,1
+4,"Change password","Change password",7,"fa fa-power-off",crud.jsp?crud_type=admin/change_password.html,crud.jsp?crud_type=admin/change_password.html&language=en_US,2,1,1
+5,"User's Roles","User's Roles",4,"fa fa-check-square-o",crud.jsp?crud_type=user_role/new.html,crud.jsp?crud_type=user_role/new.html&language=en_US,2,1,1
+6,"Phân quyền Role","Assignment Rights Role",3,"fa fa-unlock-alt",crud.jsp?crud_type=menu_access/new.html,crud.jsp?crud_type=menu_access/new.html&language=en_US,2,1,1
+7,Menus,Menus,5,"fa fa-medium",menu/index.html,crud.jsp?crud_type=menu/index.html&language=en_US,2,1,1
+10000,NULL,NULL,NULL,NULL,/neo/,NULL,NULL,NULL,1
+10001,NULL,NULL,NULL,NULL,/neo/home.html,NULL,NULL,NULL,1
+10002,NULL,NULL,NULL,NULL,/neo/index,NULL,NULL,NULL,1
+10003,NULL,NULL,NULL,NULL,/neo/index.html,NULL,NULL,NULL,1
+10004,NULL,NULL,NULL,NULL,/neo/ref/dt_ajax.html,NULL,NULL,NULL,1
+10005,NULL,NULL,NULL,NULL,/neo/logout,NULL,NULL,NULL,1
+10006,NULL,NULL,NULL,NULL,/neo/crud_ajax/val,NULL,NULL,NULL,1
+10007,NULL,NULL,NULL,NULL,/neo/qry/dt_ajax.html,NULL,NULL,NULL,1
+10008,NULL,NULL,NULL,NULL,/neo/crud_ajax/update,NULL,NULL,NULL,1
